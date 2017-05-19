@@ -49,8 +49,7 @@ class LocationHelper: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastKnownLocation = locations.first
         manager.stopUpdatingLocation()
-        let austin = CLLocation(latitude: 30.3600965, longitude: -97.7348391)
-        locationHandler?(austin)
+        locationHandler?(lastKnownLocation)
         locationHandler = nil
     }
 }

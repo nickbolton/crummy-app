@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:austin.gpx">
-   </FileRef>
-   <FileRef
       location = "group:CrummyApp.xcodeproj">
    </FileRef>
    <FileRef

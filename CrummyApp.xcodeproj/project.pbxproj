@@ -17,6 +17,7 @@
 		927B1DA91ECE4C34006C96E3 /* ForwardGeocodingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DA81ECE4C34006C96E3 /* ForwardGeocodingResult.swift */; };
 		927B1DAB1ECE4C4F006C96E3 /* BoundingCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DAA1ECE4C4F006C96E3 /* BoundingCoordinates.swift */; };
 		927B1DAD1ECE50E5006C96E3 /* ForwardGeocodingResultDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DAC1ECE50E5006C96E3 /* ForwardGeocodingResultDecoder.swift */; };
+		927B1DAF1ECF38C6006C96E3 /* austin.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 927B1DAE1ECF38C6006C96E3 /* austin.gpx */; };
 		92CC1C171ECC77720054379A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C161ECC77720054379A /* AppDelegate.swift */; };
 		92CC1C1E1ECC77720054379A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CC1C1D1ECC77720054379A /* Assets.xcassets */; };
 		92CC1C211ECC77720054379A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CC1C1F1ECC77720054379A /* LaunchScreen.storyboard */; };
@@ -58,6 +59,7 @@
 		927B1DA81ECE4C34006C96E3 /* ForwardGeocodingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardGeocodingResult.swift; sourceTree = "<group>"; };
 		927B1DAA1ECE4C4F006C96E3 /* BoundingCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingCoordinates.swift; sourceTree = "<group>"; };
 		927B1DAC1ECE50E5006C96E3 /* ForwardGeocodingResultDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardGeocodingResultDecoder.swift; sourceTree = "<group>"; };
+		927B1DAE1ECF38C6006C96E3 /* austin.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = austin.gpx; path = ../austin.gpx; sourceTree = "<group>"; };
 		92CC1C131ECC77720054379A /* CrummyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrummyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CC1C161ECC77720054379A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92CC1C1D1ECC77720054379A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				92CC1C161ECC77720054379A /* AppDelegate.swift */,
 				92CC1C1D1ECC77720054379A /* Assets.xcassets */,
 				92CC1C1F1ECC77720054379A /* LaunchScreen.storyboard */,
+				927B1DAE1ECF38C6006C96E3 /* austin.gpx */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				927B1DA11ECDC416006C96E3 /* Info.plist in Resources */,
+				927B1DAF1ECF38C6006C96E3 /* austin.gpx in Resources */,
 				92CC1C211ECC77720054379A /* LaunchScreen.storyboard in Resources */,
 				927B1D9C1ECDC35A006C96E3 /* Localizable.strings in Resources */,
 				92CC1C1E1ECC77720054379A /* Assets.xcassets in Resources */,
