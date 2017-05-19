@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Places
+
+  Created by Nick Bolton on 8/11/16.
+  Copyright © 2016 Pixelbleed LLC. All rights reserved.
+*/
+
+"search-placeholder-title" = "Search for places…";
+"search-empty-title" = "No search results";
+"no-connectivity-message" = "No internet connection";

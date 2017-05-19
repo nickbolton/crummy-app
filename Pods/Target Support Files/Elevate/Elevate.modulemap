@@ -1,0 +1,6 @@
+framework module Elevate {
+  umbrella header "Elevate-umbrella.h"
+
+  export *
+  module * { export * }
+}

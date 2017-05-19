@@ -1,0 +1,168 @@
+//
+//  MainViewController.swift
+//  CrummyApp
+//
+//  Created by Nick Bolton on 5/17/17.
+//  Copyright © 2017 Pixelbleed LLC. All rights reserved.
+//
+
+import UIKit
+import ReachabilitySwift
+
+class MainViewController: BaseViewController<MainRootView>, MainInteractionHandler, UITableViewDataSource, UITableViewDelegate {
+    
+    private var dataSource = [ForwardGeocodingResult]()
+    private var searchOperation: OpenCageForwardGeocodingOperation?
+    
+    // request throttling
+    private var throttleInterval: TimeInterval = 1.0
+    private var lastRequestTime: TimeInterval = 0.0
+    private var accumulatedSearchTerm: String?
+    
+    // reachability 
+    private let reachability = Reachability()!
+    
+    deinit {
+        reachability.stopNotifier()
+    }
+
+    // MARK: Setup
+    
+    private func setupNavigationBar() {
+        navigationController?.makeNavBarTransparent()
+    }
+    
+    private func setupRootView() {
+        rootView?.tableView.dataSource = self
+        rootView?.tableView.delegate = self
+        rootView?.interactionHandler = self
+    }
+    
+    private func setupReachability() {
+        reachability.whenReachable = { reachability in
+            DispatchQueue.main.async { [weak self] in
+                self?.rootView?.isConnectedToInternet = true
+            }
+        }
+        reachability.whenUnreachable = { reachability in
+            DispatchQueue.main.async { [weak self] in
+                self?.rootView?.isConnectedToInternet = false
+            }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            Logger.error("Unable to reability start notifier")
+        }
+    }
+    
+    // MARK: View Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupRootView()
+        setupReachability()
+        setupNavigationBar()
+        observeKeyboardWillHide()
+        observeKeyboardWillShow()
+        if reachability.isReachable {
+            searchPlaces("Drafthouse", onlyCinemas: true, accumulated: false)
+        }
+    }
+    
+    // MARK: Keyboard Handlers
+    
+    override internal func keyboardWillShow(userInfo: [AnyHashable : Any]?, curve: UIViewAnimationOptions, duration: TimeInterval, translation: CGFloat) {
+        rootView?.setNeedsLayout()
+        UIView.animate(withDuration: duration, delay: 0.0, options: curve, animations: { [weak self] in
+            self?.rootView?.moveSearchContainer(by: translation)
+        }, completion: nil)
+    }
+    
+    override internal func keyboardWillHide(userInfo: [AnyHashable : Any]?, curve: UIViewAnimationOptions, duration: TimeInterval, translation: CGFloat) {
+        rootView?.setNeedsLayout()
+        UIView.animate(withDuration: duration, delay: 0.0, options: curve, animations: { [weak self] in
+            self?.rootView?.moveSearchContainer(by: 0.0)
+            }, completion: nil)
+    }
+    
+    // MARK: Helpers
+    
+    private func reloadData() {
+        self.rootView?.tableView.reloadData()
+        self.rootView?.emptyState = (dataSource.count == 0)
+    }
+    
+    private func searchPlaces(_ term: String, onlyCinemas: Bool, accumulated: Bool, forced: Bool = false) {
+        
+        guard let rootView = rootView else { return }
+        guard reachability.isReachable else { return }
+
+        let currentTime = Date.timeIntervalSinceReferenceDate
+        guard forced || (rootView.isSearching || currentTime - lastRequestTime > throttleInterval) else {
+            if accumulated && (accumulatedSearchTerm == nil || term != accumulatedSearchTerm!) {
+                accumulatedSearchTerm = term
+            }
+            return
+        }
+        
+        accumulatedSearchTerm = nil
+        lastRequestTime = currentTime
+        rootView.isSearching = true
+        
+        LocationHelper.shared.currentLocation { [weak self] location in
+            guard let `self` = self else { return }
+            Rest.shared.findPlaces(named: term,
+                                   near: location,
+                                   onSuccess: { result in
+                if onlyCinemas {
+                    self.dataSource = result.filter { $0.type == .cinema }
+                } else {
+                    self.dataSource = result.sorted { ($0.type.rawValue, $0.name) < ($1.type.rawValue, $1.name) }
+                }
+                self.reloadData()
+                rootView.isSearching = false
+                if let term = self.accumulatedSearchTerm {
+                    self.searchPlaces(term, onlyCinemas: false, accumulated: false, forced: true)
+                }
+            }, onFailure: nil)
+        }
+    }
+    
+    // MARK: MainInteractionHandler Conformance
+    
+    func searchView(_: MainRootView, didUpdateSearchTerm term: String) {
+        searchPlaces(term, onlyCinemas: false, accumulated: true)
+    }
+
+    func searchViewDidTapSearchButton(_: MainRootView, searchTerm: String) {
+        searchPlaces(searchTerm, onlyCinemas: false, accumulated: false)
+    }
+    
+    // MARK: UITableViewDataSource Conformance
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MainCell.self)) as! MainCell
+        
+        if indexPath.row < dataSource.count {
+            let item = dataSource[indexPath.row]
+            cell.title = item.name
+        }
+        return cell;
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count;
+    }
+    
+    // MARK: UITableViewDataSource Conformance
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+    
+    // MARK: Status Bar
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    override var prefersStatusBarHidden: Bool { return false }
+}
