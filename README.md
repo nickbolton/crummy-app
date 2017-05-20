@@ -1,4 +1,4 @@
-# crummy-app
+# Places
 
 ## Project Setup
 - Install cocoapods - pod install
