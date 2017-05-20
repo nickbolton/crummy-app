@@ -143,7 +143,7 @@ class SearchRootView: BaseView, UITextFieldDelegate {
         searchField.minimumFontSize = 17.0
         searchField.font = font
         
-        searchField.textColor = UIColor.searchFieldTextColor
+        searchField.textColor = UIColor.primaryTextColor
         searchField.tintColor = UIColor.appTintColor
         isLookingForOtherPlaces = true
         
@@ -195,7 +195,7 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     private func updateSearchPlaceholder(_ placeholder: String) {
         let font = UIFont.systemFont(ofSize: 22.0)
         let placeholderDescriptor = TextDescriptor(text: placeholder,
-                                                   color: UIColor.searchFieldPlaceholderTextColor,
+                                                   color: UIColor.secondaryTextColor,
                                                    font: font)
         searchField.attributedPlaceholder = placeholderDescriptor.attributedText
     }

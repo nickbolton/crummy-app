@@ -14,7 +14,7 @@ class SearchResultCell: BaseTableViewCell {
     private let titleLabel = UILabel()
     private let addressLabel = UILabel()
     
-    private let margins: CGFloat = 6.0
+    private let margins: CGFloat = 8.0
     private let textSideMargins: CGFloat = 12.0
     
     var title: String = "" { didSet { titleLabel.text = title } }
@@ -60,7 +60,7 @@ class SearchResultCell: BaseTableViewCell {
     }
     
     private func constrainContentContainer() {
-        contentContainer.alignTop(offset: margins)
+        contentContainer.alignTop()
         contentContainer.alignBottom(offset: -margins)
         contentContainer.alignLeading(offset: margins)
         contentContainer.alignTrailing(offset: -margins)
@@ -69,12 +69,12 @@ class SearchResultCell: BaseTableViewCell {
     // MARK: Title Label
     
     private func initializeTitleLabel() {
-        titleLabel.textColor = UIColor.searchFieldTextColor
+        titleLabel.textColor = UIColor.primaryTextColor
         titleLabel.font = UIFont.systemFont(ofSize: 22.0)
     }
     
     private func constrainTitleLabel() {
-        let topSpace: CGFloat = 7.0
+        let topSpace: CGFloat = 9.0
         titleLabel.alignLeading(offset: textSideMargins)
         titleLabel.alignTrailing(offset: -textSideMargins)
         titleLabel.alignTop(offset: topSpace)
@@ -84,7 +84,7 @@ class SearchResultCell: BaseTableViewCell {
     
     private func initializeAddressLabel() {
         addressLabel.font = UIFont.systemFont(ofSize: 17.0)
-        addressLabel.textColor = UIColor.searchAddressTextColor
+        addressLabel.textColor = UIColor.secondaryTextColor
     }
     
     private func constrainAddressLabel() {
