@@ -134,12 +134,14 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     
     private func initializeSearchField() {
         
+        let font = UIFont.systemFont(ofSize: 22.0)
         searchField.keyboardAppearance = .dark
         searchField.autocorrectionType = .no
         searchField.returnKeyType = .search
         searchField.delegate = self
         searchField.adjustsFontSizeToFitWidth = true
         searchField.minimumFontSize = 17.0
+        searchField.font = font
         
         searchField.textColor = UIColor.searchFieldTextColor
         searchField.tintColor = UIColor.appTintColor
@@ -153,8 +155,7 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     
     private func constrainSearchField() {
         let sideMargin: CGFloat = 10.0
-        let yOffset: CGFloat = 0.0
-        searchField.centerY(offset: yOffset)
+        searchField.centerY()
         searchField.alignLeft(toRightOfView: searchIconImageView, offset: sideMargin)
         searchField.alignRight(toLeftOfView: activityIndicatorView, offset: -sideMargin)
     }
