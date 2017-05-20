@@ -216,7 +216,7 @@ class SearchRootView: BaseView, UITextFieldDelegate {
         tableView.register(SearchResultCell.self, forCellReuseIdentifier: NSStringFromClass(SearchResultCell.self))
         
         let top = UIApplication.shared.statusBarFrame.height
-        let bottom = searchContainerHeight + defaultMargins
+        let bottom = searchContainerHeight + searchContainerMargins
         tableView.contentInset = UIEdgeInsetsMake(top, 0.0, bottom, 0.0)
     }
     

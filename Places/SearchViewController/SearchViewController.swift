@@ -75,6 +75,7 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
     // MARK: Keyboard Handlers
     
     override internal func keyboardWillShow(userInfo: [AnyHashable : Any]?, curve: UIViewAnimationOptions, duration: TimeInterval, translation: CGFloat) {
+        guard let _ = view.window else { return }
         rootView?.setNeedsLayout()
         UIView.animate(withDuration: duration, delay: 0.0, options: curve, animations: { [weak self] in
             self?.rootView?.moveSearchContainer(by: translation)

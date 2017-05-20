@@ -11,11 +11,11 @@ import UIKit
 class LocationTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
 
     private var presenting = true
+    private let scalingFactor: CGFloat = 0.1
     
     // MARK: UIViewControllerAnimatedTransitioning protocol methods
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        
         if presenting {
             animatePresentingTransition(using: transitionContext)
         } else {
@@ -26,41 +26,58 @@ class LocationTransitionManager: NSObject, UIViewControllerAnimatedTransitioning
     private func animatePresentingTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         let container = transitionContext.containerView
-        let fromView = transitionContext.view(forKey: UITransitionContextViewKey.from)!
-        let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
-        container.addSubview(fromView)
+        
+        let toViewController = transitionContext.viewController(forKey: .to)!
+        let fromView = transitionContext.view(forKey: .from)!
+        let toView = transitionContext.view(forKey: .to)!
+
         container.addSubview(toView)
         
+        toView.frame = transitionContext.finalFrame(for: toViewController)
         toView.alpha = 0.0
-    
-        // get the duration of the animation
-        // DON'T just type '0.5s' -- the reason why won't make sense until the next post
-        // but for now it's important to just follow this approach
-        let duration = self.transitionDuration(using: transitionContext)
         
-        // perform the animation!
-        // for this example, just slid both fromView and toView to the left at the same time
-        // meaning fromView is pushed off the screen and toView slides into view
-        // we also use the block animation usingSpringWithDamping for a little bounce
+        let scale = 1.0 + scalingFactor
+        toView.transform = CGAffineTransform(scaleX: scale, y: scale)
+    
+        let duration = self.transitionDuration(using: transitionContext)
         let options = UIViewAnimationOptions.beginFromCurrentState.union(.allowAnimatedContent)
-        UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: options, animations: {
-            
+
+        UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: options, animations: {
+            let scale = 1.0 - self.scalingFactor
             toView.alpha = 1.0
-            fromView.alpha = 0.0
-            
+            fromView.transform = CGAffineTransform(scaleX: scale, y: scale)
+            toView.transform = .identity
         }, completion: { finished in
-            
-            // tell our transitionContext object that we've finished animating
-            transitionContext.completeTransition(true)
-            
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }
     
     private func animateDismissingTransition(using transitionContext: UIViewControllerContextTransitioning) {
+
+        let container = transitionContext.containerView
+        
+        let fromView = transitionContext.view(forKey: .from)!
+        let toView = transitionContext.view(forKey: .to)!
+        
+        container.insertSubview(toView, at: 0)
+        
+        let duration = self.transitionDuration(using: transitionContext)
+        
+        let options = UIViewAnimationOptions.beginFromCurrentState.union(.allowAnimatedContent)
+        UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: options, animations: {
+            fromView.alpha = 0.0
+            toView.transform = .identity
+            
+            let scale = 1.0 + self.scalingFactor
+            fromView.transform = CGAffineTransform(scaleX: scale, y: scale)
+
+        }, completion: { finished in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        })
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.75
+        return 0.5
     }
     
     // MARK: UIViewControllerTransitioningDelegate protocol methods

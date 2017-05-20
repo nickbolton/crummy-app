@@ -39,7 +39,7 @@ class SearchResultCell: BaseTableViewCell {
     
     override func assembleViews() {
         super.assembleViews()
-        contentView.addSubview(contentContainer)
+        addSubview(contentContainer)
         contentContainer.addSubview(titleLabel)
         contentContainer.addSubview(addressLabel)
     }
