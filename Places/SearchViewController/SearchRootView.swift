@@ -39,6 +39,7 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     private var searchBottomConstraint: NSLayoutConstraint?
     
     private let defaultMargins: CGFloat = 6.0
+    private let searchContainerMargins: CGFloat = 3.0
     private let searchContainerHeight: CGFloat = 55.0
 
     // MARK: View Hierarchy Construction
@@ -103,10 +104,10 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     }
     
     private func constrainSearchContainer() {
-        searchContainer.alignLeading(offset: defaultMargins)
-        searchContainer.alignTrailing(offset: -defaultMargins)
+        searchContainer.alignLeading(offset: searchContainerMargins)
+        searchContainer.alignTrailing(offset: -searchContainerMargins)
         searchContainer.layout(height: searchContainerHeight)
-        searchBottomConstraint = searchContainer.alignBottom(offset: -defaultMargins)
+        searchBottomConstraint = searchContainer.alignBottom(offset: -searchContainerMargins)
     }
     
     // MARK: Search Icon Image View
@@ -120,7 +121,8 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     private func constrainSearchIconImageView() {
         let size: CGFloat = 22.0
         let leftMargin: CGFloat = 12.0
-        searchIconImageView.centerY()
+        let yOffset: CGFloat = 1.0
+        searchIconImageView.centerY(offset: yOffset)
         searchIconImageView.alignLeading(offset: leftMargin)
         searchIconImageView.layout(width: size)
         searchIconImageView.layout(height: size)
@@ -281,7 +283,7 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     
     func moveSearchContainer(by offset: CGFloat) {
         searchIconImageView.tintColor = (offset == 0.0) ? UIColor.appTintColor : UIColor.searchIconTypingTintColor
-        searchBottomConstraint?.constant = -defaultMargins + offset
+        searchBottomConstraint?.constant = -searchContainerMargins + offset
         layoutIfNeeded()
     }
     

@@ -13,6 +13,7 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
     
     private var dataSource = [ForwardGeocodingResult]()
     private var searchOperation: OpenCageForwardGeocodingOperation?
+    private let transitionManager = LocationTransitionManager()
     
     // request throttling
     private var throttleInterval: TimeInterval = 1.0
@@ -98,6 +99,7 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
         
         guard let rootView = rootView else { return }
         guard reachability.isReachable else { return }
+        guard term.length > 0 else { return }
 
         let currentTime = Date.timeIntervalSinceReferenceDate
         guard forced || (rootView.isSearching || currentTime - lastRequestTime > throttleInterval) else {
@@ -134,6 +136,7 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
     
     private func presentLocationViewController(with result: ForwardGeocodingResult) {
         let vc = LocationViewController(result: result)
+        vc.transitioningDelegate = transitionManager
         present(vc, animated: true)
     }
     
@@ -182,7 +185,7 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
             presentLocationViewController(with: result)
         }
     }
-        
+    
     // MARK: Status Bar
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }

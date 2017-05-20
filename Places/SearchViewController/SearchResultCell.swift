@@ -56,7 +56,7 @@ class SearchResultCell: BaseTableViewCell {
     private func initializeContentContainer() {
         let cornerRadius: CGFloat = 8.0
         contentContainer.layer.cornerRadius = cornerRadius
-        contentContainer.backgroundColor = UIColor.searchBackgroundColor
+        contentContainer.backgroundColor = UIColor.searchResultColor
     }
     
     private func constrainContentContainer() {

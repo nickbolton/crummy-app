@@ -24,6 +24,7 @@
 		927B1DC71ED06535006C96E3 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DC61ED06535006C96E3 /* Address.swift */; };
 		929AD2F11ED0718A00AE0984 /* NSAttributedString+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AD2F01ED0718A00AE0984 /* NSAttributedString+Utils.swift */; };
 		929AD2F31ED09CDB00AE0984 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AD2F21ED09CDB00AE0984 /* LocationAnnotation.swift */; };
+		929AD2F51ED0B2AA00AE0984 /* LocationTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AD2F41ED0B2AA00AE0984 /* LocationTransitionManager.swift */; };
 		92CC1C171ECC77720054379A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C161ECC77720054379A /* AppDelegate.swift */; };
 		92CC1C1E1ECC77720054379A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CC1C1D1ECC77720054379A /* Assets.xcassets */; };
 		92CC1C211ECC77720054379A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CC1C1F1ECC77720054379A /* LaunchScreen.storyboard */; };
@@ -71,6 +72,7 @@
 		927B1DC61ED06535006C96E3 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		929AD2F01ED0718A00AE0984 /* NSAttributedString+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Utils.swift"; sourceTree = "<group>"; };
 		929AD2F21ED09CDB00AE0984 /* LocationAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
+		929AD2F41ED0B2AA00AE0984 /* LocationTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTransitionManager.swift; sourceTree = "<group>"; };
 		92CC1C131ECC77720054379A /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CC1C161ECC77720054379A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92CC1C1D1ECC77720054379A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				927B1DC21ED062D7006C96E3 /* SearchViewController.swift */,
 				927B1DC11ED062D7006C96E3 /* SearchRootView.swift */,
 				927B1DC01ED062D7006C96E3 /* SearchResultCell.swift */,
+				929AD2F41ED0B2AA00AE0984 /* LocationTransitionManager.swift */,
 			);
 			path = SearchViewController;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				92CC1C551ECC8F090054379A /* UIViewController+Helpers.swift in Sources */,
 				92CC1C611ECCA23C0054379A /* OpenCageForwardGeocodingOperation.swift in Sources */,
 				92CC1C761ECDBA970054379A /* Int+Utils.swift in Sources */,
+				929AD2F51ED0B2AA00AE0984 /* LocationTransitionManager.swift in Sources */,
 				927B1DBE1ECFDA58006C96E3 /* LocationViewController.swift in Sources */,
 				92CC1C5F1ECCA1D70054379A /* RestOperation.swift in Sources */,
 				92CC1C741ECDBA830054379A /* String+Utils.swift in Sources */,
