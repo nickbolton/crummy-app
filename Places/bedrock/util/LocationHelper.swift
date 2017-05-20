@@ -30,7 +30,7 @@ class LocationHelper: NSObject, CLLocationManagerDelegate {
     }
     
     func currentLocation(onCompletion: LocationHandler? = nil) {
-        if CLLocationManager.locationServicesEnabled() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             locationHandler = onCompletion
             manager.startUpdatingLocation()
         } else {

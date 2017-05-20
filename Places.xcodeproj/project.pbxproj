@@ -190,7 +190,6 @@
 				927B1DA71ECE4BD6006C96E3 /* Models */,
 				92CC1C3D1ECC7AAA0054379A /* Rest */,
 				92CC1C6E1ECDB86C0054379A /* Extensions */,
-				92CC1C6D1ECDB84B0054379A /* Utils */,
 				92CC1C281ECC77D40054379A /* Bedrock */,
 				92CC1C4A1ECC8BE00054379A /* Supporting Files */,
 			);
@@ -295,13 +294,6 @@
 				92CC1C601ECCA23C0054379A /* OpenCageForwardGeocodingOperation.swift */,
 			);
 			path = OpenCage;
-			sourceTree = "<group>";
-		};
-		92CC1C6D1ECDB84B0054379A /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		92CC1C6E1ECDB86C0054379A /* Extensions */ = {
