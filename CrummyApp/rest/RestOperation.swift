@@ -72,7 +72,7 @@ extension RestOperation {
     internal func validateResponse(response: DataResponse<Any>,
                                    onCompletion: @escaping ValidationHandler) {
         
-//        dumpResponse(response)
+        dumpResponse(response)
 
         let statusCode = response.response?.statusCodeEnum
         
@@ -94,34 +94,34 @@ extension RestOperation {
     }
     
     private func dumpResponse(_ response: DataResponse<Any>) {
-        Logger.debug(response.timeline)
-        Logger.debug(response.request ?? "No request")  // original URL request
+        Logger.shared.debug(response.timeline)
+        Logger.shared.debug(response.request ?? "No request")  // original URL request
         if let httpBody = response.request?.httpBody {
-            Logger.debug("request body: \(String(data: httpBody, encoding: String.Encoding.utf8) ?? "No request body")")
+            Logger.shared.debug("request body: \(String(data: httpBody, encoding: String.Encoding.utf8) ?? "No request body")")
         }
-        Logger.debug("status: \(response.response?.statusCode ?? -1000)")
+        Logger.shared.debug("status: \(response.response?.statusCode ?? -1000)")
         if let requestHeaders = response.request?.allHTTPHeaderFields {
             print("request headers:");
             for (name, value) in requestHeaders {
-                Logger.debug("\(name) = \(value)")
+                Logger.shared.debug("\(name) = \(value)")
             }
         }
         if let requestBody = response.request?.httpBody {
-            Logger.debug("request body:");
-            Logger.debug(NSString(data: requestBody, encoding: String.Encoding.utf8.rawValue) ?? "No request body") // request body
+            Logger.shared.debug("request body:");
+            Logger.shared.debug(NSString(data: requestBody, encoding: String.Encoding.utf8.rawValue) ?? "No request body") // request body
         }
-        Logger.debug(response.response ?? "No response") // URL response
+        Logger.shared.debug(response.response ?? "No response") // URL response
         if let responseHeaders = response.response?.allHeaderFields {
-            Logger.debug("response headers:");
+            Logger.shared.debug("response headers:");
             for (name, value) in responseHeaders {
-                Logger.debug("\(name) = \(value)")
+                Logger.shared.debug("\(name) = \(value)")
             }
         }
         if let responseBody = response.data {
-            Logger.debug(NSString(data: responseBody, encoding: String.Encoding.utf8.rawValue) ?? "No response data") // server data
+            Logger.shared.debug(NSString(data: responseBody, encoding: String.Encoding.utf8.rawValue) ?? "No response data") // server data
         }
         if let error = response.result.error {
-            Logger.error("Error: \(error)")
+            Logger.shared.error("Error: \(error)")
         }
     }
     

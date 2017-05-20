@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum LocationType: String {
     case cinema
@@ -17,13 +18,17 @@ struct ForwardGeocodingResult {
     
     let lat: Double
     let lng: Double
-    let name: String
+    let address: Address
     let type: LocationType
     
-    init(lat: Double, lng: Double, name: String, type: LocationType) {
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2DMake(lat, lng)
+    }
+    
+    init(lat: Double, lng: Double, address: Address, type: LocationType) {
         self.lat = lat
         self.lng = lng
-        self.name = name
+        self.address = address
         self.type = type
     }
 }

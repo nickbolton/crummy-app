@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LocationHelper.shared.initialize()
         NetworkActivityIndicatorManager.shared.isEnabled = true
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = MainViewController()
+        window?.rootViewController = SearchViewController()
         window?.makeKeyAndVisible()
         return true
     }

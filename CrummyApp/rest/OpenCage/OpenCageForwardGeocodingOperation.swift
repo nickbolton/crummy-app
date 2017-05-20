@@ -46,6 +46,7 @@ class OpenCageForwardGeocodingOperation: OpenCageRestOperation {
                         
                         guard let decodedJson = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? Dictionary<String, AnyObject> else {
                             let error = NSError(domain: CrummyAppErrorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey : "Invalid response"])
+                            Logger.shared.error("Error occurred decoding json: \(error)")
                             onFailure(error, false)
                             return
                         }
@@ -61,6 +62,7 @@ class OpenCageForwardGeocodingOperation: OpenCageRestOperation {
                         self.fireResultHandler(results)
                         onSuccess()
                     } catch {
+                        Logger.shared.error("Error occurred parsing request: \(error)")
                         onFailure(error, false)
                     }
                 }
@@ -72,26 +74,5 @@ class OpenCageForwardGeocodingOperation: OpenCageRestOperation {
         DispatchQueue.main.async {
             handler(results)
         }
-    }
-    
-//    private func parseResults(_ results: [[String: Any]]?) -> [ForwardGeocodingResult] {
-//        guard let results = results else {
-//            return []
-//        }
-//        
-//        var placeResults = [ForwardGeocodingResult]()
-//        
-//        for dict in results {
-//            guard let geometry = dict[geometryKey] as? [String: Any] else { continue }
-//            guard
-//                let lat = geometry[latKey] as? Float,
-//                let long = geometry[longKey] as? Float,
-//                let name = dict[nameKey] as? String else {
-//                    continue
-//            }
-//            placeResults.append(ForwardGeocodingResult(name: name, lat: lat, long: long))
-//        }
-//        
-//        return placeResults
-//    }
+    }    
 }

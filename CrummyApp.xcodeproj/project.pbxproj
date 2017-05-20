@@ -11,13 +11,19 @@
 		927B1D941ECDBF42006C96E3 /* TextDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1D931ECDBF42006C96E3 /* TextDescriptor.swift */; };
 		927B1D981ECDBFEE006C96E3 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1D971ECDBFEE006C96E3 /* Localize.swift */; };
 		927B1D9C1ECDC35A006C96E3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 927B1D9E1ECDC35A006C96E3 /* Localizable.strings */; };
-		927B1DA11ECDC416006C96E3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 927B1DA01ECDC416006C96E3 /* Info.plist */; };
-		927B1DA41ECDD058006C96E3 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DA31ECDD058006C96E3 /* MainCell.swift */; };
 		927B1DA61ECDD06E006C96E3 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DA51ECDD06E006C96E3 /* BaseTableViewCell.swift */; };
 		927B1DA91ECE4C34006C96E3 /* ForwardGeocodingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DA81ECE4C34006C96E3 /* ForwardGeocodingResult.swift */; };
 		927B1DAB1ECE4C4F006C96E3 /* BoundingCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DAA1ECE4C4F006C96E3 /* BoundingCoordinates.swift */; };
 		927B1DAD1ECE50E5006C96E3 /* ForwardGeocodingResultDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DAC1ECE50E5006C96E3 /* ForwardGeocodingResultDecoder.swift */; };
 		927B1DAF1ECF38C6006C96E3 /* austin.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 927B1DAE1ECF38C6006C96E3 /* austin.gpx */; };
+		927B1DBD1ECFDA58006C96E3 /* LocationRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DBB1ECFDA58006C96E3 /* LocationRootView.swift */; };
+		927B1DBE1ECFDA58006C96E3 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DBC1ECFDA58006C96E3 /* LocationViewController.swift */; };
+		927B1DC31ED062D7006C96E3 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DC01ED062D7006C96E3 /* SearchResultCell.swift */; };
+		927B1DC41ED062D7006C96E3 /* SearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DC11ED062D7006C96E3 /* SearchRootView.swift */; };
+		927B1DC51ED062D7006C96E3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DC21ED062D7006C96E3 /* SearchViewController.swift */; };
+		927B1DC71ED06535006C96E3 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B1DC61ED06535006C96E3 /* Address.swift */; };
+		929AD2F11ED0718A00AE0984 /* NSAttributedString+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AD2F01ED0718A00AE0984 /* NSAttributedString+Utils.swift */; };
+		929AD2F31ED09CDB00AE0984 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AD2F21ED09CDB00AE0984 /* LocationAnnotation.swift */; };
 		92CC1C171ECC77720054379A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C161ECC77720054379A /* AppDelegate.swift */; };
 		92CC1C1E1ECC77720054379A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CC1C1D1ECC77720054379A /* Assets.xcassets */; };
 		92CC1C211ECC77720054379A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CC1C1F1ECC77720054379A /* LaunchScreen.storyboard */; };
@@ -31,9 +37,7 @@
 		92CC1C3F1ECC7ABC0054379A /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C3E1ECC7ABC0054379A /* Rest.swift */; };
 		92CC1C431ECC7CF60054379A /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C421ECC7CF60054379A /* DispatchQueue+Utils.swift */; };
 		92CC1C491ECC84720054379A /* Error+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C481ECC84720054379A /* Error+Utils.swift */; };
-		92CC1C4E1ECC8C3C0054379A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C4D1ECC8C3C0054379A /* MainViewController.swift */; };
 		92CC1C511ECC8C720054379A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C501ECC8C720054379A /* BaseViewController.swift */; };
-		92CC1C531ECC8D520054379A /* MainRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C521ECC8D520054379A /* MainRootView.swift */; };
 		92CC1C551ECC8F090054379A /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C541ECC8F090054379A /* UIViewController+Helpers.swift */; };
 		92CC1C571ECC8FF40054379A /* UINavigationController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C561ECC8FF40054379A /* UINavigationController+Helpers.swift */; };
 		92CC1C5B1ECCA1870054379A /* OpenCageRestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC1C5A1ECCA1870054379A /* OpenCageRestOperation.swift */; };
@@ -54,12 +58,19 @@
 		927B1D9D1ECDC35A006C96E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		927B1D9F1ECDC35B006C96E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		927B1DA01ECDC416006C96E3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		927B1DA31ECDD058006C96E3 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		927B1DA51ECDD06E006C96E3 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		927B1DA81ECE4C34006C96E3 /* ForwardGeocodingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardGeocodingResult.swift; sourceTree = "<group>"; };
 		927B1DAA1ECE4C4F006C96E3 /* BoundingCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingCoordinates.swift; sourceTree = "<group>"; };
 		927B1DAC1ECE50E5006C96E3 /* ForwardGeocodingResultDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardGeocodingResultDecoder.swift; sourceTree = "<group>"; };
 		927B1DAE1ECF38C6006C96E3 /* austin.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = austin.gpx; path = ../austin.gpx; sourceTree = "<group>"; };
+		927B1DBB1ECFDA58006C96E3 /* LocationRootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRootView.swift; sourceTree = "<group>"; };
+		927B1DBC1ECFDA58006C96E3 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		927B1DC01ED062D7006C96E3 /* SearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		927B1DC11ED062D7006C96E3 /* SearchRootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRootView.swift; sourceTree = "<group>"; };
+		927B1DC21ED062D7006C96E3 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		927B1DC61ED06535006C96E3 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		929AD2F01ED0718A00AE0984 /* NSAttributedString+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Utils.swift"; sourceTree = "<group>"; };
+		929AD2F21ED09CDB00AE0984 /* LocationAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
 		92CC1C131ECC77720054379A /* CrummyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrummyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CC1C161ECC77720054379A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92CC1C1D1ECC77720054379A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,9 +85,7 @@
 		92CC1C3E1ECC7ABC0054379A /* Rest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
 		92CC1C421ECC7CF60054379A /* DispatchQueue+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Utils.swift"; sourceTree = "<group>"; };
 		92CC1C481ECC84720054379A /* Error+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+Utils.swift"; sourceTree = "<group>"; };
-		92CC1C4D1ECC8C3C0054379A /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		92CC1C501ECC8C720054379A /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		92CC1C521ECC8D520054379A /* MainRootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainRootView.swift; sourceTree = "<group>"; };
 		92CC1C541ECC8F090054379A /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		92CC1C561ECC8FF40054379A /* UINavigationController+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Helpers.swift"; sourceTree = "<group>"; };
 		92CC1C5A1ECCA1870054379A /* OpenCageRestOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenCageRestOperation.swift; sourceTree = "<group>"; };
@@ -121,14 +130,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		927B1DA71ECE4BD6006C96E3 /* models */ = {
+		927B1DA71ECE4BD6006C96E3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				927B1DC61ED06535006C96E3 /* Address.swift */,
 				927B1DA81ECE4C34006C96E3 /* ForwardGeocodingResult.swift */,
 				927B1DAC1ECE50E5006C96E3 /* ForwardGeocodingResultDecoder.swift */,
 				927B1DAA1ECE4C4F006C96E3 /* BoundingCoordinates.swift */,
 			);
-			path = models;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		927B1DBA1ECFDA58006C96E3 /* LocationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				927B1DBC1ECFDA58006C96E3 /* LocationViewController.swift */,
+				927B1DBB1ECFDA58006C96E3 /* LocationRootView.swift */,
+				929AD2F21ED09CDB00AE0984 /* LocationAnnotation.swift */,
+			);
+			path = LocationViewController;
+			sourceTree = "<group>";
+		};
+		927B1DBF1ED062D7006C96E3 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				927B1DC21ED062D7006C96E3 /* SearchViewController.swift */,
+				927B1DC11ED062D7006C96E3 /* SearchRootView.swift */,
+				927B1DC01ED062D7006C96E3 /* SearchResultCell.swift */,
+			);
+			path = SearchViewController;
 			sourceTree = "<group>";
 		};
 		92CC1C0A1ECC77720054379A = {
@@ -152,19 +182,19 @@
 		92CC1C151ECC77720054379A /* CrummyApp */ = {
 			isa = PBXGroup;
 			children = (
-				92CC1C4C1ECC8C280054379A /* MainViewController */,
-				92CC1C4B1ECC8C280054379A /* DetailViewController */,
-				927B1DA71ECE4BD6006C96E3 /* models */,
-				92CC1C3D1ECC7AAA0054379A /* rest */,
-				92CC1C6E1ECDB86C0054379A /* extensions */,
-				92CC1C6D1ECDB84B0054379A /* utils */,
-				92CC1C281ECC77D40054379A /* bedrock */,
+				927B1DBF1ED062D7006C96E3 /* SearchViewController */,
+				927B1DBA1ECFDA58006C96E3 /* LocationViewController */,
+				927B1DA71ECE4BD6006C96E3 /* Models */,
+				92CC1C3D1ECC7AAA0054379A /* Rest */,
+				92CC1C6E1ECDB86C0054379A /* Extensions */,
+				92CC1C6D1ECDB84B0054379A /* Utils */,
+				92CC1C281ECC77D40054379A /* Bedrock */,
 				92CC1C4A1ECC8BE00054379A /* Supporting Files */,
 			);
 			path = CrummyApp;
 			sourceTree = "<group>";
 		};
-		92CC1C281ECC77D40054379A /* bedrock */ = {
+		92CC1C281ECC77D40054379A /* Bedrock */ = {
 			isa = PBXGroup;
 			children = (
 				92CC1C291ECC77D40054379A /* extensions */,
@@ -173,7 +203,7 @@
 				92CC1C3A1ECC7A470054379A /* view */,
 				92CC1C371ECC78F70054379A /* util */,
 			);
-			path = bedrock;
+			path = Bedrock;
 			sourceTree = "<group>";
 		};
 		92CC1C291ECC77D40054379A /* extensions */ = {
@@ -181,6 +211,7 @@
 			children = (
 				92CC1C751ECDBA970054379A /* Int+Utils.swift */,
 				92CC1C731ECDBA830054379A /* String+Utils.swift */,
+				929AD2F01ED0718A00AE0984 /* NSAttributedString+Utils.swift */,
 				92CC1C711ECDB8EA0054379A /* UIColor+Utils.swift */,
 				92CC1C2B1ECC77F70054379A /* View+Layout.swift */,
 				92CC1C541ECC8F090054379A /* UIViewController+Helpers.swift */,
@@ -222,14 +253,14 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		92CC1C3D1ECC7AAA0054379A /* rest */ = {
+		92CC1C3D1ECC7AAA0054379A /* Rest */ = {
 			isa = PBXGroup;
 			children = (
 				92CC1C591ECCA1870054379A /* OpenCage */,
 				92CC1C3E1ECC7ABC0054379A /* Rest.swift */,
 				92CC1C5E1ECCA1D70054379A /* RestOperation.swift */,
 			);
-			path = rest;
+			path = Rest;
 			sourceTree = "<group>";
 		};
 		92CC1C4A1ECC8BE00054379A /* Supporting Files */ = {
@@ -243,23 +274,6 @@
 				927B1DAE1ECF38C6006C96E3 /* austin.gpx */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		92CC1C4B1ECC8C280054379A /* DetailViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DetailViewController;
-			sourceTree = "<group>";
-		};
-		92CC1C4C1ECC8C280054379A /* MainViewController */ = {
-			isa = PBXGroup;
-			children = (
-				92CC1C4D1ECC8C3C0054379A /* MainViewController.swift */,
-				92CC1C521ECC8D520054379A /* MainRootView.swift */,
-				927B1DA31ECDD058006C96E3 /* MainCell.swift */,
-			);
-			path = MainViewController;
 			sourceTree = "<group>";
 		};
 		92CC1C4F1ECC8C620054379A /* viewController */ = {
@@ -280,19 +294,19 @@
 			path = OpenCage;
 			sourceTree = "<group>";
 		};
-		92CC1C6D1ECDB84B0054379A /* utils */ = {
+		92CC1C6D1ECDB84B0054379A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = utils;
+			path = Utils;
 			sourceTree = "<group>";
 		};
-		92CC1C6E1ECDB86C0054379A /* extensions */ = {
+		92CC1C6E1ECDB86C0054379A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				92CC1C6F1ECDB87D0054379A /* UIColor+Design.swift */,
 			);
-			path = extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,7 +372,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				927B1DA11ECDC416006C96E3 /* Info.plist in Resources */,
 				927B1DAF1ECF38C6006C96E3 /* austin.gpx in Resources */,
 				92CC1C211ECC77720054379A /* LaunchScreen.storyboard in Resources */,
 				927B1D9C1ECDC35A006C96E3 /* Localizable.strings in Resources */,
@@ -421,38 +434,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				927B1DC41ED062D7006C96E3 /* SearchRootView.swift in Sources */,
+				929AD2F31ED09CDB00AE0984 /* LocationAnnotation.swift in Sources */,
+				927B1DBD1ECFDA58006C96E3 /* LocationRootView.swift in Sources */,
 				92CC1C331ECC787E0054379A /* BaseOperation.swift in Sources */,
 				92CC1C341ECC787E0054379A /* RetryingOperation.swift in Sources */,
 				92CC1C491ECC84720054379A /* Error+Utils.swift in Sources */,
 				92CC1C701ECDB87D0054379A /* UIColor+Design.swift in Sources */,
 				92CC1C5B1ECCA1870054379A /* OpenCageRestOperation.swift in Sources */,
+				927B1DC51ED062D7006C96E3 /* SearchViewController.swift in Sources */,
 				927B1DA61ECDD06E006C96E3 /* BaseTableViewCell.swift in Sources */,
 				92CC1C551ECC8F090054379A /* UIViewController+Helpers.swift in Sources */,
 				92CC1C611ECCA23C0054379A /* OpenCageForwardGeocodingOperation.swift in Sources */,
 				92CC1C761ECDBA970054379A /* Int+Utils.swift in Sources */,
+				927B1DBE1ECFDA58006C96E3 /* LocationViewController.swift in Sources */,
 				92CC1C5F1ECCA1D70054379A /* RestOperation.swift in Sources */,
 				92CC1C741ECDBA830054379A /* String+Utils.swift in Sources */,
-				92CC1C531ECC8D520054379A /* MainRootView.swift in Sources */,
 				92CC1C321ECC787E0054379A /* OperationsManager.swift in Sources */,
+				927B1DC31ED062D7006C96E3 /* SearchResultCell.swift in Sources */,
 				92CC1C431ECC7CF60054379A /* DispatchQueue+Utils.swift in Sources */,
 				927B1DA91ECE4C34006C96E3 /* ForwardGeocodingResult.swift in Sources */,
 				927B1DAD1ECE50E5006C96E3 /* ForwardGeocodingResultDecoder.swift in Sources */,
 				92CC1C721ECDB8EA0054379A /* UIColor+Utils.swift in Sources */,
+				929AD2F11ED0718A00AE0984 /* NSAttributedString+Utils.swift in Sources */,
 				92CC1C571ECC8FF40054379A /* UINavigationController+Helpers.swift in Sources */,
 				92CC1C391ECC79050054379A /* Logger.swift in Sources */,
 				92CC1C5D1ECCA1B10054379A /* Rest+OpenCage.swift in Sources */,
-				92CC1C4E1ECC8C3C0054379A /* MainViewController.swift in Sources */,
 				927B1D981ECDBFEE006C96E3 /* Localize.swift in Sources */,
 				92CC1C171ECC77720054379A /* AppDelegate.swift in Sources */,
 				92CC1C3F1ECC7ABC0054379A /* Rest.swift in Sources */,
 				92CC1C3C1ECC7A5B0054379A /* BaseView.swift in Sources */,
 				927B1DAB1ECE4C4F006C96E3 /* BoundingCoordinates.swift in Sources */,
-				927B1DA41ECDD058006C96E3 /* MainCell.swift in Sources */,
 				927B1D941ECDBF42006C96E3 /* TextDescriptor.swift in Sources */,
 				92CC1C691ECCC5A10054379A /* LocationHelper.swift in Sources */,
 				92CC1C511ECC8C720054379A /* BaseViewController.swift in Sources */,
 				92CC1C2C1ECC77F70054379A /* View+Layout.swift in Sources */,
 				92CC1C311ECC787E0054379A /* SerialOperationQueue.swift in Sources */,
+				927B1DC71ED06535006C96E3 /* Address.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

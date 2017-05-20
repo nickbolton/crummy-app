@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  SearchViewController.swift
 //  CrummyApp
 //
 //  Created by Nick Bolton on 5/17/17.
@@ -9,7 +9,7 @@
 import UIKit
 import ReachabilitySwift
 
-class MainViewController: BaseViewController<MainRootView>, MainInteractionHandler, UITableViewDataSource, UITableViewDelegate {
+class SearchViewController: BaseViewController<SearchRootView>, SearchInteractionHandler, UITableViewDataSource, UITableViewDelegate {
     
     private var dataSource = [ForwardGeocodingResult]()
     private var searchOperation: OpenCageForwardGeocodingOperation?
@@ -53,7 +53,7 @@ class MainViewController: BaseViewController<MainRootView>, MainInteractionHandl
         do {
             try reachability.startNotifier()
         } catch {
-            Logger.error("Unable to reability start notifier")
+            Logger.shared.error("Unable to reability start notifier")
         }
     }
     
@@ -84,7 +84,7 @@ class MainViewController: BaseViewController<MainRootView>, MainInteractionHandl
         rootView?.setNeedsLayout()
         UIView.animate(withDuration: duration, delay: 0.0, options: curve, animations: { [weak self] in
             self?.rootView?.moveSearchContainer(by: 0.0)
-            }, completion: nil)
+        }, completion: nil)
     }
     
     // MARK: Helpers
@@ -119,35 +119,48 @@ class MainViewController: BaseViewController<MainRootView>, MainInteractionHandl
                 if onlyCinemas {
                     self.dataSource = result.filter { $0.type == .cinema }
                 } else {
-                    self.dataSource = result.sorted { ($0.type.rawValue, $0.name) < ($1.type.rawValue, $1.name) }
+                    self.dataSource = result.sorted { ($0.type.rawValue, $0.address.name) < ($1.type.rawValue, $1.address.name) }
                 }
                 self.reloadData()
                 rootView.isSearching = false
                 if let term = self.accumulatedSearchTerm {
                     self.searchPlaces(term, onlyCinemas: false, accumulated: false, forced: true)
                 }
-            }, onFailure: nil)
+            }, onFailure: { error in
+                rootView.isSearching = false
+            })
         }
     }
     
-    // MARK: MainInteractionHandler Conformance
+    private func presentLocationViewController(with result: ForwardGeocodingResult) {
+        let vc = LocationViewController(result: result)
+        present(vc, animated: true)
+    }
     
-    func searchView(_: MainRootView, didUpdateSearchTerm term: String) {
+    // MARK: SearchInteractionHandler Conformance
+    
+    func searchView(_: SearchRootView, didUpdateSearchTerm term: String) {
         searchPlaces(term, onlyCinemas: false, accumulated: true)
+        if let rootView = rootView {
+            if rootView.isLookingForOtherPlaces && term.length > 0 {
+                rootView.isLookingForOtherPlaces = false
+            }
+        }
     }
 
-    func searchViewDidTapSearchButton(_: MainRootView, searchTerm: String) {
+    func searchViewDidTapSearchButton(_: SearchRootView, searchTerm: String) {
         searchPlaces(searchTerm, onlyCinemas: false, accumulated: false)
     }
     
     // MARK: UITableViewDataSource Conformance
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(MainCell.self)) as! MainCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(SearchResultCell.self)) as! SearchResultCell
         
         if indexPath.row < dataSource.count {
             let item = dataSource[indexPath.row]
-            cell.title = item.name
+            cell.title = item.address.name
+            cell.address = item.address.formattedAddress
         }
         return cell;
     }
@@ -156,11 +169,15 @@ class MainViewController: BaseViewController<MainRootView>, MainInteractionHandl
         return dataSource.count;
     }
     
-    // MARK: UITableViewDataSource Conformance
+    // MARK: UITableViewDelegate Conformance
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.item < dataSource.count {
+            let result = dataSource[indexPath.item]
+            presentLocationViewController(with: result)
+        }
     }
-    
+        
     // MARK: Status Bar
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }

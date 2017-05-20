@@ -6,6 +6,7 @@
   Copyright © 2016 Pixelbleed LLC. All rights reserved.
 */
 
+"search-placeholder-other-title" = "Search for other places…";
 "search-placeholder-title" = "Search for places…";
 "search-empty-title" = "No search results";
 "no-connectivity-message" = "No internet connection";

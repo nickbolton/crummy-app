@@ -1,5 +1,5 @@
 //
-//  MainRootView.swift
+//  SearchRootView.swift
 //  CrummyApp
 //
 //  Created by Nick Bolton on 5/17/17.
@@ -8,18 +8,25 @@
 
 import UIKit
 
-protocol MainInteractionHandler {
-    func searchView(_: MainRootView, didUpdateSearchTerm: String)
-    func searchViewDidTapSearchButton(_: MainRootView, searchTerm: String)
+protocol SearchInteractionHandler {
+    func searchView(_: SearchRootView, didUpdateSearchTerm: String)
+    func searchViewDidTapSearchButton(_: SearchRootView, searchTerm: String)
 }
 
-class MainRootView: BaseView, UITextFieldDelegate {
+class SearchRootView: BaseView, UITextFieldDelegate {
     
-    var interactionHandler: MainInteractionHandler?
+    var interactionHandler: SearchInteractionHandler?
     var emptyState = false { didSet { updateEmptyState() } }
     var isSearching = false { didSet { updateSearchingState() } }
     var isConnectedToInternet = false { didSet { updateConnectivityState() } }
-    
+
+    var isLookingForOtherPlaces = true {
+        didSet {
+            let placeholder = isLookingForOtherPlaces ? "search-placeholder-other-title" : "search-placeholder-title"
+            updateSearchPlaceholder(placeholder.localized())
+        }
+    }
+
     let tableView = UITableView()
     private let searchContainer = UIView()
     private let searchIconImageView = UIImageView()
@@ -127,11 +134,6 @@ class MainRootView: BaseView, UITextFieldDelegate {
     
     private func initializeSearchField() {
         
-        let font = UIFont.systemFont(ofSize: 22.0)
-        let placeholderDescriptor = TextDescriptor(text: "search-placeholder-title".localized(),
-                                                   color: UIColor.searchFieldPlaceholderTextColor,
-                                                   font: font)
-        searchField.attributedPlaceholder = placeholderDescriptor.attributedText
         searchField.keyboardAppearance = .dark
         searchField.autocorrectionType = .no
         searchField.returnKeyType = .search
@@ -140,8 +142,8 @@ class MainRootView: BaseView, UITextFieldDelegate {
         searchField.minimumFontSize = 17.0
         
         searchField.textColor = UIColor.searchFieldTextColor
-        searchField.font = font
         searchField.tintColor = UIColor.appTintColor
+        isLookingForOtherPlaces = true
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(nameFieldUpdated(noti:)),
@@ -172,12 +174,12 @@ class MainRootView: BaseView, UITextFieldDelegate {
     // MARK: Table View
     
     private func initializeTableView() {
-        let rowHeight: CGFloat = 64.0
+        let rowHeight: CGFloat = 72.0
         tableView.rowHeight = rowHeight
         tableView.keyboardDismissMode = .onDrag
         tableView.backgroundColor = UIColor.defaultBackgroundColor
         tableView.separatorColor = .clear
-        tableView.register(MainCell.self, forCellReuseIdentifier: NSStringFromClass(MainCell.self))
+        tableView.register(SearchResultCell.self, forCellReuseIdentifier: NSStringFromClass(SearchResultCell.self))
         tableView.contentInset = UIEdgeInsetsMake(UIApplication.shared.statusBarFrame.height, 0.0, 0.0, 0.0)
     }
     
@@ -188,6 +190,14 @@ class MainRootView: BaseView, UITextFieldDelegate {
     }
     
     // MARK: Helpers
+    
+    private func updateSearchPlaceholder(_ placeholder: String) {
+        let font = UIFont.systemFont(ofSize: 22.0)
+        let placeholderDescriptor = TextDescriptor(text: placeholder,
+                                                   color: UIColor.searchFieldPlaceholderTextColor,
+                                                   font: font)
+        searchField.attributedPlaceholder = placeholderDescriptor.attributedText
+    }
     
     private func updateEmptyState() {
         guard isConnectedToInternet else { return }
