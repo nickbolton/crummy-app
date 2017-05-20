@@ -11,6 +11,7 @@ import UIKit
 protocol SearchInteractionHandler {
     func searchView(_: SearchRootView, didUpdateSearchTerm: String)
     func searchViewDidTapSearchButton(_: SearchRootView, searchTerm: String)
+    func searchViewDidTapClearTextButton(_: SearchRootView)
 }
 
 class SearchRootView: BaseView, UITextFieldDelegate {
@@ -32,32 +33,35 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     private let searchIconImageView = UIImageView()
     private let searchField = UITextField()
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    private let clearButton = UIButton()
     private let messageLabel = UILabel()
     private let topCoverView = UIView()
     private var searchBottomConstraint: NSLayoutConstraint?
     
     private let defaultMargins: CGFloat = 6.0
-    
+    private let searchContainerHeight: CGFloat = 55.0
+
     // MARK: View Hierarchy Construction
     
     override func initializeViews() {
         super.initializeViews()
-        self.backgroundColor = UIColor.defaultBackgroundColor
         initializeSearchContainer()
         initializeSearchIconImageView()
         initializeSearchField()
         initializeMessageLabel()
+        initializeClearButton()
         initializeTableView()
         initializeTopCoverView()
     }
     
     override func assembleViews() {
         super.assembleViews()
-        addSubview(searchContainer)
         addSubview(tableView)
+        addSubview(searchContainer)
         addSubview(topCoverView)
         addSubview(messageLabel)
         searchContainer.addSubview(searchIconImageView)
+        searchContainer.addSubview(clearButton)
         searchContainer.addSubview(activityIndicatorView)
         searchContainer.addSubview(searchField)
     }
@@ -67,6 +71,7 @@ class SearchRootView: BaseView, UITextFieldDelegate {
         constrainMessageLabel()
         constrainSearchContainer()
         constrainSearchIconImageView()
+        constrainClearButton()
         constrainActivityIndicatorView()
         constrainSearchField()
         constrainTableView()
@@ -98,10 +103,9 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     }
     
     private func constrainSearchContainer() {
-        let height: CGFloat = 55.0
         searchContainer.alignLeading(offset: defaultMargins)
         searchContainer.alignTrailing(offset: -defaultMargins)
-        searchContainer.layout(height: height)
+        searchContainer.layout(height: searchContainerHeight)
         searchBottomConstraint = searchContainer.alignBottom(offset: -defaultMargins)
     }
     
@@ -120,6 +124,33 @@ class SearchRootView: BaseView, UITextFieldDelegate {
         searchIconImageView.alignLeading(offset: leftMargin)
         searchIconImageView.layout(width: size)
         searchIconImageView.layout(height: size)
+    }
+    
+    // MARK: Clear Button
+    
+    private func initializeClearButton() {
+        clearButton.setImage(UIImage(named: "x")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        clearButton.setImage(UIImage(named: "x-pressed")?.withRenderingMode(.alwaysTemplate), for: .highlighted)
+        clearButton.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
+        clearButton.tintColor = UIColor.searchClearTextColor
+    }
+    
+    private func constrainClearButton() {
+        if let image = clearButton.image(for: .normal) {
+            clearButton.layout(size: image.size)
+            clearButton.centerY()
+            
+            let centerXConstraint = NSLayoutConstraint(
+                item: clearButton,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: activityIndicatorView,
+                attribute: .centerX,
+                multiplier: 1.0,
+                constant: 0.0);
+            
+            centerXConstraint.isActive = true;
+        }
     }
     
     // MARK: Activity Indicator View
@@ -181,13 +212,14 @@ class SearchRootView: BaseView, UITextFieldDelegate {
         tableView.backgroundColor = UIColor.defaultBackgroundColor
         tableView.separatorColor = .clear
         tableView.register(SearchResultCell.self, forCellReuseIdentifier: NSStringFromClass(SearchResultCell.self))
-        tableView.contentInset = UIEdgeInsetsMake(UIApplication.shared.statusBarFrame.height, 0.0, 0.0, 0.0)
+        
+        let top = UIApplication.shared.statusBarFrame.height
+        let bottom = searchContainerHeight + defaultMargins
+        tableView.contentInset = UIEdgeInsetsMake(top, 0.0, bottom, 0.0)
     }
     
     private func constrainTableView() {
-        tableView.alignTop()
-        tableView.expandWidth()
-        tableView.alignBottom(toTopOfView: searchContainer, offset: -defaultMargins)
+        tableView.expand()
     }
     
     // MARK: Helpers
@@ -208,11 +240,17 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     }
     
     private func updateSearchingState() {
+        updateClearButton()
         if isSearching {
             activityIndicatorView.startAnimating()
         } else {
             activityIndicatorView.stopAnimating()
         }
+    }
+    
+    private func updateClearButton() {
+        let text = searchField.text ?? ""
+        clearButton.isHidden = isSearching || text.length <= 0
     }
     
     private func updateConnectivityState() {
@@ -227,6 +265,16 @@ class SearchRootView: BaseView, UITextFieldDelegate {
     
     private func updateMessageView(message: String) {
         messageLabel.text = message
+    }
+    
+    private func updateSearchShadow() {
+        let path = UIBezierPath(rect: searchContainer.bounds)
+        searchContainer.layer.shadowPath = path.cgPath
+        searchContainer.layer.shadowColor = UIColor.black.cgColor
+        searchContainer.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        searchContainer.layer.shadowRadius = 5.0
+        searchContainer.layer.shadowOpacity = 1.0
+        searchContainer.layer.masksToBounds = false
     }
     
     // MARK: Search Container Layout
@@ -250,5 +298,21 @@ class SearchRootView: BaseView, UITextFieldDelegate {
         if let text = searchField.text {
             interactionHandler?.searchView(self, didUpdateSearchTerm: text.trimmed)
         }
+        updateClearButton()
+    }
+    
+    // MARK: Actions
+    
+    internal func clearTapped() {
+        searchField.text = nil
+        interactionHandler?.searchViewDidTapClearTextButton(self)
+        updateClearButton()
+    }
+    
+    // MARK: Layout
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateSearchShadow()
     }
 }

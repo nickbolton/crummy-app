@@ -152,6 +152,11 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
         searchPlaces(searchTerm, onlyCinemas: false, accumulated: false)
     }
     
+    func searchViewDidTapClearTextButton(_: SearchRootView) {
+        dataSource = []
+        reloadData()
+    }
+    
     // MARK: UITableViewDataSource Conformance
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -16,6 +16,7 @@ extension UIColor {
     static let secondaryTextColor = UIColor(hex: 0x666666)
     static let searchIconTypingTintColor = UIColor(hex: 0x505050)
     static let searchBackgroundColor = UIColor(hex: 0x2b2b2b)
+    static let searchClearTextColor = UIColor(hex: 0x666666)
     static let appTintColor = UIColor(hex: 0xf0cf54)
     static let locationNameColor = UIColor.white
     static let locationBackgroundColor = UIColor(hex: 0x333333)
