@@ -55,8 +55,16 @@ class LocationViewController: BaseViewController<LocationRootView>, LocationInte
     
     // MARK: LocationInteractionHandler Conformance
     
-    func locationViewDidTapCloseButton(_: LocationRootView) {
+    internal func locationViewDidTapCloseButton(_: LocationRootView) {
         dismiss(animated: true)
+    }
+    
+    internal func locationViewDidTapMapsButton(_: LocationRootView) {
+        let placemark = MKPlacemark(coordinate: result.coordinate)
+        let item = MKMapItem(placemark: placemark)
+        item.name = result.address.name
+        let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        item.openInMaps(launchOptions: options)
     }
     
     // MARK: MKMapViewDelegate Conformance

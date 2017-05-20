@@ -11,6 +11,7 @@ import MapKit
 
 protocol LocationInteractionHandler {
     func locationViewDidTapCloseButton(_: LocationRootView)
+    func locationViewDidTapMapsButton(_: LocationRootView)
 }
 
 class LocationRootView: BaseView {
@@ -20,6 +21,9 @@ class LocationRootView: BaseView {
     private let dismissContainer = UIView()
     private let contentContainer = UIView()
     private let closeButton = UIButton()
+    private let shareButton = UIButton()
+    private let favoriteButton = UIButton()
+    private let mapsButton = UIButton()
     private let addressSideMargins: CGFloat = 12.0
     private let containerSizeMargins: CGFloat = 8.0
     private let addressLabel = UILabel()
@@ -37,6 +41,9 @@ class LocationRootView: BaseView {
         constrainDismissContainer()
         constrainContentContainer()
         constrainCloseButton()
+        constrainShareButton()
+        constrainFavoriteButton()
+        constrainMapsButton()
         constrainAddressLabel()
         constrainMapView()
     }
@@ -47,6 +54,9 @@ class LocationRootView: BaseView {
         initializeDismissContainer()
         initializeContentContainer()
         initializeCloseButton()
+        initializeShareButton()
+        initializeFavoriteButton()
+        initializeMapsButton()
         initializeAddressLabel()
         initializeMapView()
     }
@@ -56,6 +66,9 @@ class LocationRootView: BaseView {
         addSubview(dismissContainer)
         addSubview(contentContainer)
         addSubview(closeButton)
+        addSubview(shareButton)
+        addSubview(favoriteButton)
+        addSubview(mapsButton)
         contentContainer.addSubview(addressLabel)
         contentContainer.addSubview(mapView)
     }
@@ -106,7 +119,6 @@ class LocationRootView: BaseView {
     
     private func initializeCloseButton() {
         closeButton.setImage(UIImage(named: "x")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        closeButton.setImage(UIImage(named: "x-pressed")?.withRenderingMode(.alwaysTemplate), for: .highlighted)
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         closeButton.tintColor = UIColor.appTintColor
     }
@@ -116,6 +128,54 @@ class LocationRootView: BaseView {
             closeButton.layout(size: image.size)
             closeButton.alignLeft()
             closeButton.alignBottom()
+        }
+    }
+    
+    // MARK: Share Button
+    
+    private func initializeShareButton() {
+        shareButton.setImage(UIImage(named: "share")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        shareButton.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
+        shareButton.tintColor = UIColor.appTintColor
+    }
+    
+    private func constrainShareButton() {
+        if let image = shareButton.image(for: .normal) {
+            shareButton.layout(size: image.size)
+            shareButton.alignLeft(toRightOfView: closeButton)
+            shareButton.alignBottom()
+        }
+    }
+    
+    // MARK: Favorite Button
+    
+    private func initializeFavoriteButton() {
+        favoriteButton.setImage(UIImage(named: "favorite")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        favoriteButton.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
+        favoriteButton.tintColor = UIColor.appTintColor
+    }
+    
+    private func constrainFavoriteButton() {
+        if let image = favoriteButton.image(for: .normal) {
+            favoriteButton.layout(size: image.size)
+            favoriteButton.alignLeft(toRightOfView: shareButton)
+            favoriteButton.alignBottom()
+        }
+    }
+    
+    // MARK: Maps Button
+    
+    private func initializeMapsButton() {
+        mapsButton.setImage(UIImage(named: "map")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        mapsButton.addTarget(self, action: #selector(mapsTapped), for: .touchUpInside)
+        mapsButton.tintColor = UIColor.appTintColor
+    }
+    
+    private func constrainMapsButton() {
+        if let image = mapsButton.image(for: .normal) {
+            mapsButton.layout(size: image.size)
+            mapsButton.alignLeft(toRightOfView: favoriteButton)
+            mapsButton.alignBottom()
         }
     }
     
@@ -154,6 +214,16 @@ class LocationRootView: BaseView {
         if gesture.state == .ended {
             interactionHandler?.locationViewDidTapCloseButton(self)
         }
+    }
+    
+    internal func shareTapped() {
+    }
+    
+    internal func favoriteTapped() {
+    }
+    
+    internal func mapsTapped() {
+        interactionHandler?.locationViewDidTapMapsButton(self)
     }
     
     // MARK: Helpers
