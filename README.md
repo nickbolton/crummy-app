@@ -1,5 +1,12 @@
 # crummy-app
 
-Project setup:
-1) Install cocoapods - pod install
-2) Add OpenCage API Key: b668b715551c836569f3b8faf9a95259
+## Project Setup
+- Install cocoapods - pod install
+
+## Places Features
+- Initially loads nearest Drafthouse locations
+- Search-as-you-type for locations entered in search field
+- Throttling requests at 1 per second
+- Custom transitions
+- Tap anywhere to dismiss location modal
+- Open in Maps app (pin icon) for directions
