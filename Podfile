@@ -4,7 +4,7 @@ platform :ios, '9.0'
 use_frameworks!
 inhibit_all_warnings!
 
-target 'CrummyApp' do
+target 'Places' do
   pod 'Alamofire', '~> 4.0'
   pod 'AlamofireNetworkActivityIndicator', '~> 2.1'
   pod 'ReachabilitySwift', '~> 3.0'
