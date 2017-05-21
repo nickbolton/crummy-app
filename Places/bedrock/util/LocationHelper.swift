@@ -33,6 +33,14 @@ class LocationHelper: NSObject, CLLocationManagerDelegate {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             locationHandler = onCompletion
             manager.startUpdatingLocation()
+            
+            // fixes simulator not having a location
+            DispatchQueue.main.wait(timeInterval: 0.5) { [weak self] in
+                if let locationHandler = self?.locationHandler {
+                    locationHandler(nil)
+                }
+                self?.locationHandler = nil
+            }
         } else {
             onCompletion?(nil)
         }
