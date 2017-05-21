@@ -9,5 +9,5 @@
 - Search-as-you-type for locations entered in search field
 - Throttling requests at 1 per second
 - Custom transitions
-- Tap anywhere to dismiss location modal
+- Tap anywhere outside map card to dismiss location modal
 - Open in Maps app (pin icon) for directions
