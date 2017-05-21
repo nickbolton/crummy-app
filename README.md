@@ -1,5 +1,5 @@
-# Places
 ![GitHub Logo](/Places/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png)
+# Places
 
 ## Project Setup
 - Install cocoapods - pod install
