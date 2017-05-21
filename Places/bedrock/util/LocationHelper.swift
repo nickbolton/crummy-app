@@ -37,7 +37,7 @@ class LocationHelper: NSObject, CLLocationManagerDelegate {
             // fixes simulator not having a location
             DispatchQueue.main.wait(timeInterval: 0.5) { [weak self] in
                 if let locationHandler = self?.locationHandler {
-                    locationHandler(nil)
+                    locationHandler(self?.lastKnownLocation)
                 }
                 self?.locationHandler = nil
             }
