@@ -35,12 +35,7 @@ class ForwardGeocodingResultDecoder: Decoder {
             schema.addProperty(keyPath: KeyPath.state, type: .string, optional: true)
             schema.addProperty(keyPath: KeyPath.postcode, type: .string, optional: true)
         }
-        
-        let dict = json as? [String:Any]
-        if let dict = dict {
-            print("keys: \(dict.keys)")
-        }
-        
+                
         let lat: Double = entity <-! KeyPath.lat
         let lng: Double = entity <-! KeyPath.lng
         let formatted: String = entity <-! KeyPath.formatted

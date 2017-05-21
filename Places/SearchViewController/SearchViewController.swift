@@ -16,11 +16,10 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
     private let transitionManager = LocationTransitionManager()
     
     // request throttling
-    private var throttleInterval: TimeInterval = 1.0
-    private var lastRequestTime: TimeInterval = 0.0
-    private var accumulatedSearchTerm: String?
-    
-    // reachability 
+    private let throttle = Throttle()
+    private var lastSearchTerm: String? // used to perform a final search if requests came in while throttling
+
+    // reachability
     private let reachability = Reachability()!
     
     deinit {
@@ -67,9 +66,7 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
         setupNavigationBar()
         observeKeyboardWillHide()
         observeKeyboardWillShow()
-        if reachability.isReachable {
-            searchPlaces("Drafthouse", onlyCinemas: true, accumulated: false)
-        }
+        doSearchPlaces("Drafthouse", onlyCinemas: true)
     }
     
     // MARK: Keyboard Handlers
@@ -96,24 +93,23 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
         self.rootView?.emptyState = (dataSource.count == 0)
     }
     
-    private func searchPlaces(_ term: String, onlyCinemas: Bool, accumulated: Bool, forced: Bool = false) {
-        
+    private func searchPlaces(_ term: String, onlyCinemas: Bool) {
+        lastSearchTerm = term
+        throttle.throttle { [weak self] in
+            self?.doSearchPlaces(term, onlyCinemas: onlyCinemas)
+        }
+    }
+    
+    private func doSearchPlaces(_ term: String, onlyCinemas: Bool) {
+    
         guard let rootView = rootView else { return }
         guard reachability.isReachable else { return }
         guard term.length > 0 else { return }
+        guard !rootView.isSearching else { return }
 
-        let currentTime = Date.timeIntervalSinceReferenceDate
-        guard forced || (rootView.isSearching || currentTime - lastRequestTime > throttleInterval) else {
-            if accumulated && (accumulatedSearchTerm == nil || term != accumulatedSearchTerm!) {
-                accumulatedSearchTerm = term
-            }
-            return
-        }
-        
-        accumulatedSearchTerm = nil
-        lastRequestTime = currentTime
+        lastSearchTerm = nil
         rootView.isSearching = true
-        
+
         LocationHelper.shared.currentLocation { [weak self] location in
             guard let `self` = self else { return }
             Rest.shared.findPlaces(named: term,
@@ -126,8 +122,8 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
                 }
                 self.reloadData()
                 rootView.isSearching = false
-                if let term = self.accumulatedSearchTerm {
-                    self.searchPlaces(term, onlyCinemas: false, accumulated: false, forced: true)
+                if let term = self.lastSearchTerm {
+                    self.doSearchPlaces(term, onlyCinemas: false)
                 }
             }, onFailure: { error in
                 rootView.isSearching = false
@@ -144,7 +140,7 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
     // MARK: SearchInteractionHandler Conformance
     
     func searchView(_: SearchRootView, didUpdateSearchTerm term: String) {
-        searchPlaces(term, onlyCinemas: false, accumulated: true)
+        searchPlaces(term, onlyCinemas: false)
         if let rootView = rootView {
             if rootView.isLookingForOtherPlaces && term.length > 0 {
                 rootView.isLookingForOtherPlaces = false
@@ -153,7 +149,7 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
     }
 
     func searchViewDidTapSearchButton(_: SearchRootView, searchTerm: String) {
-        searchPlaces(searchTerm, onlyCinemas: false, accumulated: false)
+        searchPlaces(searchTerm, onlyCinemas: false)
     }
     
     func searchViewDidTapClearTextButton(_: SearchRootView) {

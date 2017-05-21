@@ -72,7 +72,7 @@ extension RestOperation {
     internal func validateResponse(response: DataResponse<Any>,
                                    onCompletion: @escaping ValidationHandler) {
         
-        dumpResponse(response)
+//        dumpResponse(response)
 
         let statusCode = response.response?.statusCodeEnum
         
