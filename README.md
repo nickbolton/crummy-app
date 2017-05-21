@@ -3,6 +3,7 @@
 
 ## Project Setup
 - Install cocoapods - pod install
+- In simulator, set Austin as location: Edit Scheme > Options > Allow Location Simulation > Austin
 
 ## Places Features
 - Initially loads nearest Drafthouse locations
