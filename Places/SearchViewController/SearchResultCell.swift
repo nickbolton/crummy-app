@@ -74,7 +74,7 @@ class SearchResultCell: BaseTableViewCell {
     }
     
     private func constrainTitleLabel() {
-        let topSpace: CGFloat = 9.0
+        let topSpace: CGFloat = 9.5
         titleLabel.alignLeading(offset: textSideMargins)
         titleLabel.alignTrailing(offset: -textSideMargins)
         titleLabel.alignTop(offset: topSpace)
