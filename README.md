@@ -9,6 +9,6 @@
 - Initially loads nearest Drafthouse locations
 - Search-as-you-type for locations entered in search field
 - Throttling requests at 1 per second
-- Custom transitions
+- Custom transitions (note, they look much better on an actual device :)
 - Tap anywhere outside map card to dismiss location modal
 - Open in Maps app (pin icon) for directions
