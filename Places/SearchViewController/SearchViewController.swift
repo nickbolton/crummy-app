@@ -9,9 +9,9 @@
 import UIKit
 import ReachabilitySwift
 
-class SearchViewController: BaseViewController<SearchRootView>, SearchInteractionHandler, UITableViewDataSource, UITableViewDelegate {
+class SearchViewController: BaseViewController<SearchRootView>, UITableViewDataSource, UITableViewDelegate {
     
-    private var dataSource = [ForwardGeocodingResult]()
+    fileprivate var dataSource = [ForwardGeocodingResult]()
     private var searchOperation: OpenCageForwardGeocodingOperation?
     private let transitionManager = LocationTransitionManager()
     
@@ -88,12 +88,12 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
     
     // MARK: Helpers
     
-    private func reloadData() {
+    fileprivate func reloadData() {
         self.rootView?.tableView.reloadData()
         self.rootView?.emptyState = (dataSource.count == 0)
     }
     
-    private func searchPlaces(_ term: String, onlyCinemas: Bool) {
+    fileprivate func searchPlaces(_ term: String, onlyCinemas: Bool) {
         lastSearchTerm = term
         throttle.throttle { [weak self] in
             self?.doSearchPlaces(term, onlyCinemas: onlyCinemas)
@@ -137,26 +137,6 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
         present(vc, animated: true)
     }
     
-    // MARK: SearchInteractionHandler Conformance
-    
-    func searchView(_: SearchRootView, didUpdateSearchTerm term: String) {
-        searchPlaces(term, onlyCinemas: false)
-        if let rootView = rootView {
-            if rootView.isLookingForOtherPlaces && term.length > 0 {
-                rootView.isLookingForOtherPlaces = false
-            }
-        }
-    }
-
-    func searchViewDidTapSearchButton(_: SearchRootView, searchTerm: String) {
-        searchPlaces(searchTerm, onlyCinemas: false)
-    }
-    
-    func searchViewDidTapClearTextButton(_: SearchRootView) {
-        dataSource = []
-        reloadData()
-    }
-    
     // MARK: UITableViewDataSource Conformance
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -187,4 +167,27 @@ class SearchViewController: BaseViewController<SearchRootView>, SearchInteractio
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     override var prefersStatusBarHidden: Bool { return false }
+}
+
+extension SearchViewController: SearchInteractionHandler {
+    
+    // MARK: SearchInteractionHandler Conformance
+    
+    func searchView(_: SearchRootView, didUpdateSearchTerm term: String) {
+        searchPlaces(term, onlyCinemas: false)
+        if let rootView = rootView {
+            if rootView.isLookingForOtherPlaces && term.length > 0 {
+                rootView.isLookingForOtherPlaces = false
+            }
+        }
+    }
+    
+    func searchViewDidTapSearchButton(_: SearchRootView, searchTerm: String) {
+        searchPlaces(searchTerm, onlyCinemas: false)
+    }
+    
+    func searchViewDidTapClearTextButton(_: SearchRootView) {
+        dataSource = []
+        reloadData()
+    }
 }
